@@ -2,7 +2,7 @@
 
 This is the HW 4 submission for Ahsen Uppal and Luona Guo, Zhenyu Han, Zuocheng Ding, Qi Liu, Yi Zhou.
 This shows an example of a Python-based discovery conversion server
-that supports add, remove, and lookup. For extra credit, this
+(in prototypes/discovery.py) that supports add, remove, and lookup. For extra credit, this
 discovery server includes path-finding. And the proxy_conv_server.py
 supports querying and using this protocol for path conversions.
 
@@ -134,7 +134,7 @@ add lbs g localhost 5586
 add g lbs localhost 5587
 path ft lbs
 
->nc localhost 7001 < input-02.txt
+>nc localhost 5555 < input-02.txt
 Welcome, you are connected to a Python-based simple command server.
 Success
 Success
@@ -169,3 +169,8 @@ capabilities. Including for duplicate entries. In input-01.txt we
 verify that syntax errors are properly handled. And input-02.txt
 verifies multi-path queriues.
 
+# Other notes
+We discovered that the recv socket call may return less data than has
+actually been sent by the remote side. So in the discovery server, we
+handle this case with a recv_lines function. This has the added
+benefit of supporting multi-line commands.
